@@ -15,36 +15,20 @@
 
 
 
-
-
-
 const body = document.body;
-console.log(body);
+const botao = document.getElementById('trocaCor');
 
+body.style.backgroundColor = 'purple';
+botao.addEventListener('click', mudaBody);
 
- body.style.backgroundColor = 'purple';
- 
+function mudaBody() {
+  
+  const mudaC = new mudaCor()
+  body.style.backgroundColor = mudaC.geraRGB();
+  
+}
 
-
- //  console.log(intRandom);
- 
- const btn= document.getElementById('trocaCor');
- console.log(btn);
- btn.addEventListener('click' ,()=>{
-   
-    const r =geraInteiro(255); 
-    const g = geraInteiro(255); 
-    const b =geraInteiro(255); 
-
-    body.style.backgroundColor = 'rgb('+r+',' +g+ ',' +b+')'
-    
-    
-    
-});
-
-  geraInteiro = num =>  parseInt(Math.random() * num);
-     
- 
- 
- 
- 
+// // console.log('mudaC' , mudaC);
+// const mudaC = new mudaCor()
+// // const numerov= mudaCor.r
+// console.log('r' , mudaC.r());
