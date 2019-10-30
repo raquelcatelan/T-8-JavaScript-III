@@ -10,26 +10,18 @@
 // 2. melhorando o código
 // [x] remover repetição de código
 // [x] anonymous function
-// [] arrow function
-// [] template string
+// [x] arrow function
+// [x] template string
 
 const body = document.body;
 const botao = document.getElementById('trocaCor');
 
 body.style.backgroundColor = 'purple';
-botao.addEventListener('click', mudaBody);
+botao.addEventListener('click', () => {
+  const r = geraInteiro(255);
+  const g = geraInteiro(255);
+  const b = geraInteiro(255);
+  body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+});
 
-function mudaBody() {
-  
-  const mudaC = new mudaCor()
-  body.style.backgroundColor = mudaC.geraRGB();
-  
-}
-
-// // console.log('mudaC' , mudaC);
-// const mudaC = new mudaCor()
-// // const numerov= mudaCor.r
-// console.log('r' , mudaC.r());
-
-
-
+geraInteiro = num => parseInt(Math.random() * num);
