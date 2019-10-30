@@ -6,7 +6,6 @@
 // [x] criar função de alterar a cor usando rgb()
 // [x] usar Math.random() e Math.floor() ou parseInt()
 
-
 const body = document.body;
 const botao = document.getElementById('trocaCor');
 
