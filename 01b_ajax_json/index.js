@@ -9,53 +9,75 @@ const req = new XMLHttpRequest();
 req.open('GET', url);
 req.send();
 
-req.onreadystatechange = pegarDados;
-
-function pegarDados() {
-  if (req.readyState === 4) {
-    if (req.status === 200) {
-      const response = req.response;
-      const json = JSON.parse(response);
-      const data = json.data;
-      // criarImagens(data);
-      // criarImagensFor(data);
-      // criarImagensForEach(data);
-      criarImagensForOf(data);
-    }
-  }
-}
+// [] iterar sobre o array e mostrar as três imagens usando for()
+// [] iterar sobre o array e mostrar as três imagens usando for...of
+// [] iterar sobre o array e mostrar as três imagens usando forEach
 
 
-function criarImagens(array) {
-  div.innerHTML += `
-  <img src=${array[0].imagem} >
-  <img src=${array[1].imagem} >
-  <img src=${array[2].imagem} >
-  `
-}
 
-function criarImagensFor(array) {
-  for (let i = 0; i < array.length; i++) {
-    const element = array[i];
-    const img = `<img src=${element.imagem}>`;
-    div.innerHTML += img
-  }
-}
+const request = new XMLHttpRequest()
+const url = './data/dados.json';
+const img = document.createElement('img');
+const div = document.querySelector('#root');
 
-function criarImagensForEach(array) {
-  array.forEach(element => {
-    console.log(element);
-    const img = `<img src=${element.imagem}>`;
-    div.innerHTML += img;
-  });
-}
 
-function criarImagensForOf(array) {
-  for (const posicao of array) {
-    // const img = `<img src=${posicao.imagem}>`;
-    // div.innerHTML = img;
-    const img = document.createElement('img');
-    img.src = posicao.imagem;
-    div.appendChild(img);
-  }
-}
+request.open('GET' ,  url)
+request.send()
+
+request.onreadystatechange = mostrarImg;
+
+function mostrarImg() {
+    
+    
+    if (request.status ===200 && request.readyState===4) {
+    
+        const response = request.response;
+        console.log( response);
+        
+        const json = JSON.parse(response);
+        const data = json.data;
+        console.log(data);
+        
+        const obj = data[0];
+        const obj1 = data[1];
+        const obj2 = data[2];
+        console.log(data[0].nome);
+
+        // criarImagens(data);
+        // for (let i = 0; i < data.length; i++) {
+        //     const element = data[i];
+        //     console.log(element.imagem);
+        //     const img = ` <img src=${element.imagem}>`;
+        //     div.innerHTML+= img
+            
+       
+            
+            const body = document.body;
+             body.innerHTML += `
+            <img src=${data[0].imagem}>
+                <img src=${data[1].imagem}>
+             <img src=${data[2].imagem}>
+             `
+             
+            //  criarImagensForEach(data);
+
+            for(const posicao of data){
+                console.log(posicao);
+                const img = `<img src=${posicao.imagem}>`;
+                div.innerHTML = img ;
+            }
+            
+            } 
+        }
+        
+        
+        function criarImagensForEach (array) {
+            
+            array.forEach(element => {
+                console.log(element);
+                const img = `<img src=${element.imagem}>`;
+                div.innerHTML+= img;
+                
+            });
+        }
+        

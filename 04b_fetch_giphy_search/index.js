@@ -6,45 +6,50 @@
 // [] transformar o dado recebido
 // [] apresentar <img>
 
+
 const input = document.querySelector('#gifInput');
+// console.log(input);
 const botao = document.querySelector('#gifButton');
-const div = document.querySelector('#root');
-botao.addEventListener('click', (e) => fazerFetch(e));
+// console.log(botao);
+const div = document.querySelector('#root')
 
-function fazerFetch(event) {
-  event.preventDefault();
-  const valorInput = input.value;
-  div.innerHTML = '';
-  input.value = ''
-  // console.log(valorInput);
-  const url = `http://api.giphy.com/v1/gifs/search?q=${valorInput}&api_key=dc6zaTOxFJmzC&limit=30&offset=0`
+botao.addEventListener('click' , (e) => fazerFetc(e));
 
-  fetch(url)
+function fazerFetc (event) {
+    event.preventDefault();
+    const valorInput = input.value;
+    div.innerHTML = "";
+    input.value= "";
+    // console.log(valorInput);
+    const url = `http://api.giphy.com/v1/gifs/search?q=${valorInput}&api_key=dc6zaTOxFJmzC&limit=4&offset=0`
+
+
+    fetch(url)
     .then(resposta => {
-      if (!resposta.ok) {
-        console.error(resposta.statusText);
-        mostrarErro(resposta.statusText);
-      }
-      return resposta.json()
+        if (!resposta.ok) {
+            console.error(resposta.statusText);
+            mostrarErro(resposta.statusText);
+        }
     })
-    .then(json => mostrarResultado(json))
-    .catch(e => mostrarErro(e))
-}
-mostrarErro = (e) => {
-  div.innerHTML = `<h1>${e}</h1>`
+    .then(json => mostarResultado(json))
+    .catch(erro => mostrarErro(erro))
+
+
 }
 
-function mostrarResultado(json) {
-  if (json.message) {
-    mostrarErro(json.message)
-  } else {
-    const arr = json.data
-    console.log(arr);
+mostrarErro = (erro) => {
+    div.innerHTML= `<h1>${erro}</h1>`
+}
+
+function mostarResultado (json) {
+
+    const arr  = json.data
+    console.log(json.data);
     arr.forEach(element => {
-      const srcImg = element.images.original.url
-      div.innerHTML += `
-      <img src=${srcImg}>
-      `
+        const srcImg =  element.images.original.url
+        div.innerHTML += `
+        <img src=${srcImg}>
+        `
     });
-  }
+    
 }
